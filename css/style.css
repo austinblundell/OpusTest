@@ -1,0 +1,182 @@
+/* ============================================================
+   Final Fantasy: Crystals of Eldoria — styling
+   Classic NES JRPG presentation: black borders, blue windows,
+   pixel font feel, crisp scaling.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+  --ff-blue:   #1822a8;
+  --ff-blue-d: #0a0e4a;
+  --ff-border: #f8f8ff;
+  --ff-gold:   #f8d038;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #05050f;
+  color: #fff;
+  font-family: 'Press Start 2P', monospace;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+#frame {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 8px;
+}
+
+#screen {
+  position: relative;
+  width: min(92vw, 70vh, 768px);
+  aspect-ratio: 256 / 224;
+  background: #000;
+  border: 4px solid #2a2a4a;
+  border-radius: 6px;
+  box-shadow: 0 0 0 2px #000, 0 12px 40px rgba(0,0,0,0.8);
+  overflow: hidden;
+}
+
+canvas#game {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  display: block;
+}
+
+/* ---- Overlays ---- */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6%;
+  text-align: center;
+  background: radial-gradient(circle at 50% 30%, #101038 0%, #04040f 100%);
+  z-index: 5;
+}
+.hidden { display: none !important; }
+
+.title-logo { display:flex; flex-direction:column; align-items:center; gap: 8px; }
+.title-sub {
+  font-size: clamp(7px, 2.2vw, 16px);
+  letter-spacing: 2px;
+  color: var(--ff-gold);
+  text-shadow: 2px 2px 0 #803000;
+}
+.title-main {
+  font-size: clamp(13px, 4.6vw, 34px);
+  line-height: 1.4;
+  color: #eaf2ff;
+  text-shadow: 2px 2px 0 #1822a8, 4px 4px 0 #000;
+}
+.title-menu { display:flex; flex-direction:column; gap: 12px; }
+.title-foot {
+  font-size: clamp(5px, 1.4vw, 9px);
+  color: #6a6a9a;
+  position: absolute;
+  bottom: 5%;
+}
+
+.ff-btn {
+  font-family: inherit;
+  font-size: clamp(7px, 2.2vw, 14px);
+  color: #fff;
+  background: linear-gradient(#2230c8, #141c80);
+  border: 3px solid var(--ff-border);
+  border-radius: 4px;
+  padding: 10px 18px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: transform .05s, filter .1s;
+}
+.ff-btn:hover { filter: brightness(1.25); }
+.ff-btn:active { transform: translateY(2px); }
+
+.go-text, .end-text {
+  font-size: clamp(9px, 3vw, 20px);
+  color: #ff5a5a;
+  text-shadow: 2px 2px 0 #000;
+  padding: 0 8%;
+  line-height: 1.6;
+}
+.end-text { color: #eaf2ff; font-size: clamp(7px, 2.2vw, 13px); }
+
+/* ---- In-game message window (rendered above canvas) ---- */
+.ff-window {
+  position: absolute;
+  left: 4%; right: 4%; bottom: 4%;
+  background: var(--ff-blue-d);
+  border: 3px solid var(--ff-border);
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: clamp(7px, 2.1vw, 12px);
+  line-height: 1.7;
+  z-index: 4;
+  box-shadow: inset 0 0 0 2px var(--ff-blue);
+}
+
+/* ---- Touch controls ---- */
+#touch {
+  display: none;
+  width: min(92vw, 768px);
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 6px;
+}
+.dpad { position: relative; width: 132px; height: 132px; }
+.dpad .d {
+  position: absolute;
+  width: 44px; height: 44px;
+  font-size: 14px;
+  background: #1a1a3a;
+  color: #cdd;
+  border: 2px solid #3a3a6a;
+  border-radius: 8px;
+}
+.dpad .up    { top: 0; left: 44px; }
+.dpad .down  { bottom: 0; left: 44px; }
+.dpad .left  { left: 0; top: 44px; }
+.dpad .right { right: 0; top: 44px; }
+.abtns { display: flex; gap: 14px; }
+.ab {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  font-size: 16px;
+  border: 2px solid var(--ff-border);
+  color: #fff;
+}
+.ab.a { background: #c83030; }
+.ab.b { background: #3050c8; }
+.d:active, .ab:active { filter: brightness(1.6); }
+
+#hint {
+  font-size: clamp(5px, 1.5vw, 9px);
+  color: #6a6a9a;
+  text-align: center;
+  line-height: 1.6;
+  max-width: 768px;
+}
+
+/* Show touch controls on coarse pointers / small screens */
+@media (pointer: coarse), (max-width: 700px) {
+  #touch { display: flex; }
+  #hint { display: none; }
+}

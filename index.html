@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+<meta name="theme-color" content="#0a0a2a" />
+<title>Final Fantasy: Crystals of Eldoria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="frame">
+    <div id="screen">
+      <canvas id="game" width="256" height="224"></canvas>
+
+      <!-- Title screen -->
+      <div id="title" class="overlay">
+        <div class="title-logo">
+          <div class="title-sub">FINAL FANTASY</div>
+          <div class="title-main">CRYSTALS<br/>OF ELDORIA</div>
+        </div>
+        <div class="title-menu">
+          <button class="ff-btn" id="btn-new">NEW GAME</button>
+          <button class="ff-btn" id="btn-continue">CONTINUE</button>
+        </div>
+        <div class="title-foot">© ELDORIA WORKS · A browser homage</div>
+      </div>
+
+      <!-- Message / dialogue box -->
+      <div id="msgbox" class="ff-window hidden"></div>
+
+      <!-- Game over -->
+      <div id="gameover" class="overlay hidden">
+        <div class="go-text">THE PARTY HAS FALLEN</div>
+        <button class="ff-btn" id="btn-retry">CONTINUE FROM TOWN</button>
+      </div>
+
+      <!-- Victory / ending -->
+      <div id="ending" class="overlay hidden">
+        <div class="end-text"></div>
+        <button class="ff-btn" id="btn-end">RETURN TO TITLE</button>
+      </div>
+    </div>
+
+    <!-- Touch controls for mobile -->
+    <div id="touch">
+      <div class="dpad">
+        <button data-key="ArrowUp" class="d up">▲</button>
+        <button data-key="ArrowLeft" class="d left">◀</button>
+        <button data-key="ArrowDown" class="d down">▼</button>
+        <button data-key="ArrowRight" class="d right">▶</button>
+      </div>
+      <div class="abtns">
+        <button data-key="Enter" class="ab a">A</button>
+        <button data-key="Escape" class="ab b">B</button>
+      </div>
+    </div>
+    <div id="hint">Arrows / WASD to move · Enter or A = confirm · Esc or B = cancel/menu</div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/world.js"></script>
+  <script src="js/battle.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
